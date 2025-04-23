@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Panel Prediction Result</title>
+    <style>
+        body {
+            background-color: #93CEFE;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Center content vertically */
+            min-height: 100vh; /* Ensure content takes at least full viewport height */
+        }
+        .animation-container {
+            position: absolute; /* Position the animation container absolutely */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Center the container */
+            z-index: -1; /* Place behind other content */
+        }
+        .container {
+            width: 30%; /* Set width to 80% of the viewport width */
+            max-width: 800px; /* Maximum width of 800px */
+            margin: 20px auto; /* Center the container horizontally */
+            padding: 20px;
+            border: 10px solid white;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.15); /* Translucent background */
+            text-align: center; /* Center text */
+            position: relative; /* Ensure container is positioned relative for z-index to work */
+        }
+        p {
+            color: white; /* Text color for prediction result */
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 100px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animation Container -->
+    <div class="animation-container">
+        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+        <dotlottie-player src="https://lottie.host/92166ca6-cf9c-4861-9e8c-f7c25fb03173/Few348GtzF.json" background="transparent" speed="1" style="width: 500px; height: 500px;" autoplay></dotlottie-player>
+    </div>
+
+    <!-- Main Container for Text Content -->
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <p>Solar Energy in kilowatts: {{ prediction }}</p>
+        <a href="/" class="button">Go Back To Homepage</a>
+    </div>
+</body>
+</html>

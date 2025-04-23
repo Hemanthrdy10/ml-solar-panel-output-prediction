@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to SolarSense</title>
+    <style>
+        body {
+            background-color: #93CEFE; /* Set background color to white */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: black; /* Change text color to black for better visibility */
+            display: flex;
+            flex-direction: column; /* Align content vertically */
+            min-height: 100vh; /* Ensure content takes at least full viewport height */
+            position: relative; /* Set body to relative position */
+        }
+        .animation-container {
+            position: absolute; /* Position the animation container absolutely */
+            top: 16%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Center the container */
+            z-index: -1; /* Place behind other content */
+        }
+        .container {
+            max-width: 1000px; /* Increase the maximum width of the container */
+            padding: 20px;
+            border: 10px solid white;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.25); /* Darker and more translucent background */
+            color: black;
+            text-align: center; /* Center text */
+            margin: auto; /* Center the container horizontally */
+            position: relative; /* Set position to relative */
+            z-index: 1; /* Set z-index to bring container forward */
+            margin-top: 100px; /* Push the container down */
+        }
+        h1 {
+            color: white ;
+            font-weight: bold;
+            margin-left: 20px; /* Adjust the left margin of the heading */
+        }
+        p {
+            color: white ;
+            line-height: 1.6;
+            margin-bottom: 20px; /* Add margin at the bottom of paragraphs */
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 100px;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+            margin-left: 20px; /* Adjust the left margin of the button */
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .additional-content {
+            display: flex;
+            flex-direction: column; /* Change to column layout */
+            align-items: center; /* Align content vertically */
+            margin-top: 50px; /* Add margin from the top */
+        }
+        .graph-container {
+            margin-top: 20px; /* Add margin from the top */
+            display: flex;
+            align-items: center; /* Align content vertically */
+            text-align: center; /* Center text */
+        }
+        .image {
+            width: 35%; /* Adjust the width of the image */
+            border-radius: 20px; /* Add curved edges to the image */
+            border-left: 45px solid transparent; /* Add transparent border to the left side */
+        }
+        .image1 {
+            width: 35%; /* Adjust the width of the image */
+            border-radius: 20px; /* Add curved edges to the image */
+            border-left: 45px solid transparent; /* Add transparent border to the left side */
+        }
+        .image2 {
+            width: 35%; /* Adjust the width of the image */
+            border-radius: 20px; /* Add curved edges to the image */
+            border-left: 45px solid transparent; /* Add transparent border to the left side */
+        }
+        .text {
+            width: 60%; /* Adjust the width of the text */
+            margin-left: 20px; /* Add margin to the left of the text */
+            margin-right:15px;
+        }
+        .text p {
+            line-height: 1.6;
+            text-align: justify;
+            margin-right:15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animation -->
+   <div class="animation-container">
+        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+        <dotlottie-player src="https://lottie.host/1ab9170f-637a-4ef1-b999-37a6f21ffd62/PCmwc28b4J.json" background="transparent" speed="1" style="width: 500px; height: 500px; opacity: 0.5;" loop autoplay></dotlottie-player>
+    </div>
+
+    <div class="container">
+        <h1>SolarSense: An ML-Powered Solar Panel Output Prediction</h1>
+        <p>To facilitate reliable solar energy production, machine learning plays a crucial role in enhancing reliability through accurate predictions. Users are invited to input their location, date, time, and relevant environmental data. Our Random Forest Regressor model, trained on solar power and weather information, offers precise predictions tailored for each season. Simply click "Predict solar power" to input your data and receive reliable forecasts for solar panel output.</p>
+        <a href="/index" class="button">Predict Solar Power</a>
+    </div>
+
+    <div class="additional-content">
+        <div class="graph-container">
+            <img src="/static/algo.jpg" alt="Your Image" class="image">
+            <div class="text">
+                <p><strong>In our SolarSense project, dedicated to solar output prediction, we systematically assessed various machine learning techniques: Decision Tree, Gradient Boosting, Support Vector Machine, and Random Forest.</strong></p>
+                <p>Following thorough evaluation, Random Forest emerged as the most effective option. This superiority became more pronounced post-seasonal optimization, where it demonstrated significant enhancements, yielding the lowest error rates across all seasons. Its proficiency in managing complex data and mitigating noise and outliers highlights its suitability for our project, affirming Random Forest as the optimal choice for precise solar output prediction.</p>
+            </div>
+        </div>
+        <!-- Place the second set of content below -->
+        <div class="graph-container">
+            <img src="/static/solarpanel123.jpg" alt="Your Image1" class="image1">
+            <div class="text">
+                <p><strong>Comparison of PolyPwr by Temperature.</strong></p>
+                <p>This graph shows the relationship between solar power energy generated and ambient temperature. The y-axis shows the amount of solar power energy generated, labeled "PolyPwr", and the x-axis shows the ambient temperature. The graph suggests that there is a positive correlation between solar power energy generated and ambient temperature. In other words, as the ambient temperature increases, the amount of solar power energy generated also increases.</p>
+            </div>
+        </div>
+        <!-- Add another set of content below -->
+        <div class="graph-container">
+            <img src="/static/season123.jpg" alt="Your Image2" class="image2">
+            <div class="text">
+                <p><strong>Comparison of PolyPwr by Seasons.</strong></p>
+                <p>The pie chart titled "PolyPwr by Season" reveals how solar power generation fluctuates throughout the year. Summer reigns supreme, capturing a whopping 46.04% of the total PolyPwr generated. Winter follows at a distant second with 24.98%, while spring brings in the least amount at 10.96%. Fall sits comfortably in the middle, contributing 18.02% of the solar energy harvest.</p>
+            </div>
+        </div>
+          <!-- Add another set of content below -->
+        <div class="graph-container">
+            <img src="/static/month123.jpg" alt="Your Image2" class="image2">
+            <div class="text">
+                <p><strong>Comparison of PolyPwr by Month.</strong></p>
+                <p>The graph shows the amount of solar power energy generated by month. The y-axis shows the amount of solar power generated, labeled "PolyPwr", and the x-axis shows the month. The graph shows that the amount of solar power generated fluctuates throughout the year. It appears to be highest in the summer months (around month 6-8) and lowest in the winter months (around month 11-1).</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

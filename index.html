@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Panel Prediction</title>
+    <style>
+        body {
+            background-color: #93CEFE; /* Set background color to black */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+            display: flex;
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Center content vertically */
+            min-height: 100vh; /* Ensure content takes at least full viewport height */
+            position: relative; /* Required for absolute positioning of animation */
+        }
+        .animation-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1; /* Ensure the animation container is behind other content */
+        }
+        .container {
+            max-width: 1000px; /* Increased width */
+            padding: 20px;
+            border: 10px solid white;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.25); /* Translucent background */
+        }
+        .input-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px; /* Increased margin between rows */
+        }
+        .input-row label {
+            flex: 0 0 150px; /* Fixed width for labels */
+            margin-right: 10px;
+        }
+        .input-row input[type="text"],
+        .input-row select {
+            flex: 1; /* Take remaining width */
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: rgba(255, 255, 255, 0.8); /* Background color for input fields */
+            color: #000; /* Text color for input fields */
+            width: calc(50% - 95px); /* Half width for text boxes */
+            margin-right: 10px; /* Added space after each text box */
+        }
+        input[type="submit"] {
+            width: 50%; /* Half width for submit button */
+            margin: 0 auto; /* Center the button horizontally */
+            padding: 8px; /* Reduced padding */
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 20px; /* Increased border-radius for rounded corners */
+            cursor: pointer;
+            font-size: 16px; /* Adjust font size */
+            transition: all 0.3s ease; /* Smooth transition for hover effect */
+            display: block; /* Ensure block-level display */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+    <!-- Include the Lottie player library script -->
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+</head>
+<body>
+    <div class="animation-container">
+        <!-- Add the animation here -->
+        <dotlottie-player src="https://lottie.host/ca046363-1deb-4227-a317-d1044372555f/nYceV9ebGs.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+    </div>
+    <div class="container">
+        <h1><center>SOLAR PANEL PREDICTOR</center></h1>
+        <form action="/predict" method="post" onsubmit="return validateForm()">
+            <div class="input-row">
+                <label for="season">Season:</label>
+                <select id="season" name="season">
+                    <option value="">Select Season</option>
+                    <option value="Winter">Winter</option>
+                    <option value="Fall">Fall</option>
+                    <option value="Summer">Summer</option>
+                    <option value="Spring">Spring</option>
+                </select>
+                <label for="humidity">Humidity (%):</label>
+                <input type="text" id="humidity" name="humidity" >
+            </div>
+            <div class="input-row">
+                <label for="pressure">Pressure (mb):</label>
+                <input type="text" id="pressure" name="pressure" >
+                <label for="location">Location:</label>
+<select id="location" name="location" required>
+    <option value="">Select Location</option>
+    <option value="Camp Murray">Camp Murray</option>
+    <option value="Grissom">Grissom</option>
+    <option value="Hill Weber">Hill Weber</option>
+    <option value="JDMT">JDMT</option>
+    <option value="Kahului">Kahului</option>
+    <option value="Malmstrom">Malmstrom</option>
+    <option value="March AFB">March AFB</option>
+    <option value="MNANG">MNANG</option>
+    <option value="Offutt">Offutt</option>
+    <option value="Peterson">Peterson</option>
+    <option value="Travis">Travis</option>
+    <option value="USAFA">USAFA</option>
+</select>
+            </div>
+            <div class="input-row">
+                <label for="ambient_temp">Temperature (C):</label>
+                <input type="text" id="ambient_temp" name="ambient_temp" >
+                <label for="cloud_ceiling">Cloud Ceiling (ft):</label>
+                <input type="text" id="cloud_ceiling" name="cloud_ceiling" >
+            </div>
+            <div class="input-row">
+                <label for="date">Date(YYYYMMDD):</label>
+                <input type="text" id="date" name="date" >
+                <label for="wind_speed">Wind Speed (m/s):</label>
+                <input type="text" id="wind_speed" name="wind_speed" >
+            </div>
+            <div class="input-row">
+                <label for="visibility">Visibility (km):</label>
+                <input type="text" id="visibility" name="visibility" >
+                <label for="time">Time(HHMM):</label>
+                <input type="text" id="time" name="time" >
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+    function validateForm() {
+        var errorMessage = "";
+        var season = document.getElementById("season").value;
+        var humidity = document.getElementById("humidity").value;
+        var pressure = document.getElementById("pressure").value;
+        var ambient_temp = document.getElementById("ambient_temp").value;
+        var cloud_ceiling = document.getElementById("cloud_ceiling").value;
+        var date = document.getElementById("date").value;
+        var wind_speed = document.getElementById("wind_speed").value;
+        var visibility = document.getElementById("visibility").value;
+        var time = document.getElementById("time").value;
+        var location = document.getElementById("location").value; // Get the selected location value
+
+        // Validate location
+        if (location === "") {
+            errorMessage += "Please select a location.\n";
+        }
+        if (season === "") {
+            errorMessage += "Please select a season.\n";
+        }
+
+
+        // Validate humidity, pressure, ambient_temp, cloud_ceiling, date, wind_speed, visibility, and time
+        if (!isNumber(humidity)) {
+            errorMessage += "Humidity must be a number.\n";
+        }
+        if (!isNumber(pressure)) {
+            errorMessage += "Pressure must be a number.\n";
+        }
+        if (!isNumber(ambient_temp)) {
+            errorMessage += "Temperature must be a number.\n";
+        }
+        if (!isNumber(cloud_ceiling)) {
+            errorMessage += "Cloud Ceiling must be a number.\n";
+        }
+        if (!isValidDate(date)) {
+            errorMessage += "Date format must be YYYYMMDD and MM should not exceed 12 and DD should not exceed 31.\n";
+        }
+        if (!isNumber(wind_speed)) {
+            errorMessage += "Wind Speed must be a number.\n";
+        }
+        if (!isNumber(visibility)) {
+            errorMessage += "Visibility must be a number.\n";
+        }
+        if (!isValidTime(time)) {
+            errorMessage += "Time format must be HHMM and HH should not exceed 24 and MM should not exceed 59.\n";
+        }
+
+        if (errorMessage !== "") {
+            alert(errorMessage);
+            return false; // Prevent form submission
+        }
+        return true; // Allow form submission
+    }
+
+    // Function to check if the value is a number
+    function isNumber(value) {
+        return !isNaN(parseFloat(value)) && isFinite(value);
+    }
+
+    // Function to check if the date format is valid (YYYYMMDD)
+    function isValidDate(date) {
+        var dateRegex = /^\d{8}$/;
+        if (!dateRegex.test(date)) {
+            return false;
+        }
+
+        // Extract month and day from the date string
+        var month = parseInt(date.substring(4, 6), 10);
+        var day = parseInt(date.substring(6), 10);
+
+        // Check if month is within range (1 to 12) and day is within range (1 to 31)
+        if (month < 1 || month > 12 || day < 1 || day > 31) {
+            return false;
+        }
+
+        return true;
+    }
+
+    // Function to check if the time format is valid (HHMM)
+    function isValidTime(time) {
+        var timeRegex = /^\d{4}$/;
+        if (!timeRegex.test(time)) {
+            return false;
+        }
+
+        // Extract hour and minute from the time string
+        var hour = parseInt(time.substring(0, 2), 10);
+        var minute = parseInt(time.substring(2), 10);
+
+        // Check if hour is within range (0 to 23) and minute is within range (0 to 59)
+        if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+
+</body>
+</html>
